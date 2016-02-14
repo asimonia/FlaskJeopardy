@@ -1,10 +1,10 @@
 # Set the path
-import os, sys
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
+import os
+from app import create_app, db
+from app.models import Questions
 from flask.ext.script import Manager, Server
-from flask_project import app
 
+app = create_app('default')
 manager = Manager(app)
 
 # Turn on debugger by default and reloader

@@ -1,10 +1,9 @@
-from flask import Blueprint, request, redirect, render_template, url_for
+from flask import request, redirect, render_template, url_for
+from .. import db
+from ..models import Questions
+from . import questions
 from flask.views import MethodView
-
 from flask.ext.mongoengine.wtf import model_form
-from .models import Questions
-
-questions = Blueprint('questions', __name__, template_folder='templates')
 
 
 class ListView(MethodView):
