@@ -1,27 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="utf-8">
     <title>Jeopardy!</title>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <style>.content {padding-top: 80px;} a.brand {color: #fff }</style>
+    <!-- Bootstrap -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link href="{{ url_for('static', filename='favicon-96x96.png') }}" rel="shortcut icon">
   </head>
 
   <body>
 
-    {% block topbar %}
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+  {% block topbar %}
+  <header>
+    <div class="navbar navbar-default navbar-fixed-top navbar-inverse">
       <div class="container">
         <div class="navbar-header">
-          <h2>
-              <a href="/" class="brand">Jeopardy!</a>
-          </h2>
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="" class="navbar-brand">Main Page</a>
         </div>
-        <div class="navbar-collapse">
-        </div><!--/.nav-collapse -->
+        <div class="collpase navbar-collapse" id="example">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="">Start Game</a></li>
+            <li class="active"><a href="">Help</a></li>
+          </ul>
+
+          <form action="" class="navbar-form navbar-right" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+
       </div>
-    </nav>
-    {% endblock %}
+    </div>
+      <div class="jumbotron">
+        <div class="container">
+          <h1>Here is your title</h1>
+          <h3>Content Goes Here</h3>
+        </div> 
+      </div> 
+  </header>
+  {% endblock %}
 
     <div class="container">
       <div class="content">
@@ -29,6 +56,10 @@
         {% block content %}{% endblock %}
       </div>
     </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="{{ url_for('static', filename='javascript/jquery-1.11.2.min.js') }}"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>
     {% block js_footer %}{% endblock %}
   </body>
   
