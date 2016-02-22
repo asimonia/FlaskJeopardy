@@ -7,5 +7,5 @@ class GameForm(Form):
 	playerone_name = StringField('Name of Player 1', validators=[Required()])
 	playertwo_name = StringField('Name of Player 2', validators=[Required()])
 	playerthree_name = StringField('Name of Player 3', validators=[Required()])
-	show_number = IntegerField('Choose show number', validators=[Required()])
+	show_number = StringField('Choose show number', validators=[Required()])
 	submit = SubmitField('Start')

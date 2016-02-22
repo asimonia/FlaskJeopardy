@@ -19,9 +19,9 @@ class Tile(db.EmbeddedDocument):
 class Game(db.Document):
 	is_playing = db.BooleanField(verbose_name="Is_Playing", required=True)
 	number_players = db.IntField(verbose_name="Number_Players", required=True)
-	player_names = db.DictField(verbose_name="Player_Names", required=True)
+	player_names = db.ListField(verbose_name="Player_Names", required=True)
 	current_player = db.IntField(verbose_name="Current_Player", required=True)
-	player_scores = db.DictField(verbose_name="Player_Scores", required=True)
+	player_scores = db.ListField(verbose_name="Player_Scores", required=True)
 	
 	show_number = db.StringField(verbose_name="Current_Show_Number", required=True)
 	current_round = db.StringField(verbose_name="Current_Round", required=True)
