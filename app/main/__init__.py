@@ -1,5 +1,5 @@
 from flask import Blueprint
 
-questions = Blueprint('questions', __name__, template_folder='templates')
+main = Blueprint('main', __name__)
 
-from . import views
+from . import views, errors
