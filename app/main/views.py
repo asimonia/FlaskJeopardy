@@ -28,21 +28,22 @@ def index():
 		questions = Questions.objects(show_number=show_number, current_round='Jeopardy!')
 
 		
-		for question in questions:
+		for question in questions.all():
 			tile = Tile(category=question.category, question=question.question, answer=question.answer, 
 					value=question.value, exists=True)
-			tile.save()
+			
 			
 		
 		initialize_game = Game(is_playing=True, number_players=players, player_names=player_names,
 								current_player=0, player_scores=player_scores, show_number=show_number,
-								current_round="Jeopardy!", categories=categories).save()
+								current_round="Jeopardy!", categories=categories)
+		
 		
 		return redirect(url_for('game_board'))
 	return render_template('questions/index.html', form=form)
 
 
+
 @main.route('/game/', methods=['GET', 'POST'])
 def game_board():
 	return render_template('questions/game_board.html')
-
