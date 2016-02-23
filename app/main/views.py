@@ -39,7 +39,7 @@ def index():
 								current_round="Jeopardy!", categories=categories)
 		
 		
-		return redirect(url_for('game_board'))
+		return render_template('questions/game_board.html', tile=tile, game=initialize_game)
 	return render_template('questions/index.html', form=form)
 
 

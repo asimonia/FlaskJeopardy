@@ -5,22 +5,19 @@
     
     <div class="panel-heading">
       <div class="col-md-12 text-center">
-      	<h1>Jeopardy!</h1>
+      	<h1> {{ game.current_round }} </h1>
       </div>
     </div>
     
     <div class="panel-heading">
-      <div class="text-center col-md-2 col-md-offset-1"><h4></h4></div> 
-      <div class="text-center col-md-2"><h4></h4></div>
-      <div class="text-center col-md-2"><h4></h4></div>
-      <div class="text-center col-md-2"><h4></h4></div>
-      <div class="text-center col-md-2"><h4></h4></div>
-      <div class="text-center col-md-2"><h4></h4></div>
+      {% for category in game.categories %}
+      <div class="text-center col-md-2"><h4>{{ category }}</h4></div> 
+      {% endfor %}
       <div class="clearfix"></div> 
     </div>
 
     <div class="panel-body" id="main-board">
-      <div class="category col-md-2 col-md-offset-1">
+      <div class="category col-md-2">
         <div class="well question">200</div>
         <div class="well question">400</div>
         <div class="well question">600</div>
@@ -53,6 +50,15 @@
     </div>
 
     <div class="category col-md-2">
+        <div class="well question">100</div>
+        <div class="well question">200</div>
+        <div class="well question">300</div>
+        <div class="well question">400</div>
+        <div class="well question">500</div>
+    </div>
+
+    <div>
+        <div class="category col-md-2">
         <div class="well question">100</div>
         <div class="well question">200</div>
         <div class="well question">300</div>
