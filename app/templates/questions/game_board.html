@@ -16,57 +16,23 @@
       <div class="clearfix"></div> 
     </div>
 
-    <div class="panel-body" id="main-board">
-      <div class="category col-md-2">
-        <div class="well question"><a href="link">200</a></div>
-        <div class="well question"><a href="link">400</a></div>
-        <div class="well question"><a href="link">600</a></div>
-        <div class="well question"><a href="link">800</a></div>
-        <div class="well question"><a href="link">1000</a></div>
-    </div>
-
-    <div class="category col-md-2">
-        <div class="well question"><a href="link">100</a></div>
-        <div class="well question"><a href="link">200</a></div>
-        <div class="well question"><a href="link">300</a></div>
-        <div class="well question"><a href="link">400</a></div>
-        <div class="well question"><a href="link">500</a></div>
-    </div>
-
-    <div class="category col-md-2">
-        <div class="well question"><a href="link">100</a></div>
-        <div class="well question"><a href="link">200</a></div>
-        <div class="well question"><a href="link">300</a></div>
-        <div class="well question"><a href="link">400</a></div>
-        <div class="well question"><a href="link">500</a></div>
-    </div>
-
-    <div class="category col-md-2">
-        <div class="well question"><a href="link">100</a></div>
-        <div class="well question"><a href="link">200</a></div>
-        <div class="well question"><a href="link">300</a></div>
-        <div class="well question"><a href="link">400</a></div>
-        <div class="well question"><a href="link">500</a></div>
-    </div>
-
-    <div class="category col-md-2">
-        <div class="well question"><a href="link">100</a></div>
-        <div class="well question"><a href="link">200</a></div>
-        <div class="well question"><a href="link">300</a></div>
-        <div class="well question"><a href="link">400</a></div>
-        <div class="well question"><a href="link">500</a></div>
-    </div>
-
-    <div>
-        <div class="category col-md-2">
-        <div class="well question"><a href="link">100</a></div>
-        <div class="well question"><a href="link">200</a></div>
-        <div class="well question"><a href="link">300</a></div>
-        <div class="well question"><a href="link">400</a></div>
-        <div class="well question"><a href="link">500</a></div>
-    </div>
     
-  </div>
+    <div class="panel-body" id="main-board">
+       {% for category in game.categories %}
+        <div class="category col-md-2">
+            {% for value in game.values %}
+                {% if game.tiles.exists %}
+                    <div class="well question"><a href="{{ category }}">{{ value|int(value) }}</a></div>
+                {% else %}
+                    <div class="well question"><a href="{{ category }}">{{ value|int(value) }}</a></div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+            
+
+</div>
 {% endblock %}
 
 {% block footer %}
