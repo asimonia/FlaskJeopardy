@@ -21,10 +21,10 @@
        {% for category in game.categories %}
         <div class="category col-md-2">
             {% for value in game.values %}
-                {% if game.tiles.exists %}
-                    <div class="well question"><a href="{{ category }}">{{ value|int(value) }}</a></div>
+                {% if True %}
+                    <div class="well question"><a href="{{ url_for('.show_question', category=category, value=value) }}">{{ value|int(value) }}</a></div>
                 {% else %}
-                    <div class="well question"><a href="{{ category }}">{{ value|int(value) }}</a></div>
+                    <div class="well question"><a href="{{ None }}">{{ None }}</a></div>
                 {% endif %}
             {% endfor %}
         </div>

@@ -1,6 +1,6 @@
 from flask import request, redirect, render_template, url_for
 from app import db
-from ..models import Questions, Game, Tile
+from ..models import Questionbank, Player, Tile, Category, Game
 from . import main
 from .forms import GameForm
 
@@ -26,25 +26,40 @@ def index():
 		player_scores.append(0)
 
 	# initialize the gameboard
-	categories = Questions.objects(show_number=show_number, current_round='Jeopardy!').distinct(field='category')
-	values = Questions.objects(show_number=show_number, current_round='Jeopardy!').distinct(field='value')
+	categories = Questionbank.objects(show_number=show_number, current_round='Jeopardy!').distinct(field='category')
+	values = Questionbank.objects(show_number=show_number, current_round='Jeopardy!').distinct(field='value')
 	values.sort()
-	questions = Questions.objects(show_number=show_number, current_round='Jeopardy!')
+	questions = Questionbank.objects(show_number=show_number, current_round='Jeopardy!')
+	init_game = Game(state='playing', show_number=show_number, current_round='Jeopardy!')
+	init_game.save()
 
-	initialize_game = Game(is_playing=True, number_players=players, player_names=player_names,
-								current_player=0, player_scores=player_scores, show_number=show_number,
-								current_round="Jeopardy!", categories=categories, values=values)
+	# add players and initialize score
+	for name, score in zip(player_names, player_scores):
+		player_save = Player(name=name, score=score)
+		init_game.players.append(player_save)
+		init_game.save()
 
-	initialize_game.save()
-		
+	# add category and value
+	for category, value in zip(categories, values):
+		category_save = Category(name=category, value=value)
+		init_game.categories.append(category_save)
+		init_game.save()
+
 	for question in questions.all():
-		tile = Tile(category=question.category, question=question.question, answer=question.answer, 
-					value=question.value, exists=True)
-		initialize_game.tiles.append(tile)
-		initialize_game.save()
+		tile = Tile(round_called=question.current_round, question=question.question, answer=question.answer, 
+					value=question.value, state='playing')
+		init_game.categories.tiles.append(tile)
+		init_game.save()
 
-	return render_template('questions/game_board.html', game=initialize_game)
+	return render_template('questions/game_board.html', game=init_game)
+
 
 @main.route('/game/', methods=['GET'])
 def game_board():
 	return render_template('questions/game_board.html')
+
+
+@main.route('/game/<category>/<int:value>/', methods=['GET'])
+def show_question(category, value):
+	game = Game.objects.all()
+	return render_template('questions/show_question.html', category=category, value=value, game=game)

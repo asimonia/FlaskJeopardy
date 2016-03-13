@@ -1,7 +1,7 @@
 # Set the path
 import os
 from app import create_app, db
-from app.models import Questions, Tile, Game
+from app.models import Questionbank, Tile, Category, Player, Game
 from flask.ext.script import Manager, Server
 
 app = create_app('default')
